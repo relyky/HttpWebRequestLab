@@ -34,18 +34,23 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numTimeOut = new System.Windows.Forms.NumericUpDown();
             this.pnlToolbar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlToolbar
             // 
+            this.pnlToolbar.Controls.Add(this.numTimeOut);
+            this.pnlToolbar.Controls.Add(this.label2);
             this.pnlToolbar.Controls.Add(this.txtUrl);
             this.pnlToolbar.Controls.Add(this.label1);
             this.pnlToolbar.Controls.Add(this.btnGo);
             this.pnlToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlToolbar.Location = new System.Drawing.Point(0, 0);
             this.pnlToolbar.Name = "pnlToolbar";
-            this.pnlToolbar.Size = new System.Drawing.Size(645, 88);
+            this.pnlToolbar.Size = new System.Drawing.Size(645, 103);
             this.pnlToolbar.TabIndex = 0;
             // 
             // txtUrl
@@ -91,12 +96,45 @@
             // 
             this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutput.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtOutput.Location = new System.Drawing.Point(0, 0);
+            this.txtOutput.Location = new System.Drawing.Point(0, 103);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(645, 376);
+            this.txtOutput.Size = new System.Drawing.Size(645, 273);
             this.txtOutput.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Timeout (ms)";
+            // 
+            // numTimeOut
+            // 
+            this.numTimeOut.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numTimeOut.Location = new System.Drawing.Point(84, 65);
+            this.numTimeOut.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numTimeOut.Name = "numTimeOut";
+            this.numTimeOut.Size = new System.Drawing.Size(99, 22);
+            this.numTimeOut.TabIndex = 4;
+            this.numTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numTimeOut.ThousandsSeparator = true;
+            this.numTimeOut.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
@@ -111,6 +149,7 @@
             this.Text = "HttpWebRequest Lab";
             this.pnlToolbar.ResumeLayout(false);
             this.pnlToolbar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,6 +163,8 @@
         private System.Windows.Forms.Button btnGo;
         private System.Windows.Forms.TextBox txtMessage;
         private System.Windows.Forms.TextBox txtOutput;
+        private System.Windows.Forms.NumericUpDown numTimeOut;
+        private System.Windows.Forms.Label label2;
     }
 }
 

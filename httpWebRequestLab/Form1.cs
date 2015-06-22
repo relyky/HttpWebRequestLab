@@ -36,7 +36,7 @@ namespace httpWebRequestLab
                 // Set some reasonable limits on resources used by this request
                 request.MaximumAutomaticRedirections = 4;
                 request.MaximumResponseHeadersLength = 4;
-                request.Timeout = 30000; // 30 seconds
+                request.Timeout = (int)numTimeOut.Value; // milliseconds
 
                 // Set credentials to use for this request.
                 request.Credentials = CredentialCache.DefaultCredentials;
