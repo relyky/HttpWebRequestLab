@@ -43,21 +43,19 @@ namespace httpWebRequestLab
                 request.Credentials = CredentialCache.DefaultCredentials;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
+                // Show some properties
                 txtMessage.AppendText(string.Format("Content Length : {0:N0}\r\n", response.ContentLength));
                 txtMessage.AppendText(string.Format("Content Type : {0}\r\n", response.ContentType));
                 txtMessage.AppendText(string.Format("Content Encoding : {0}\r\n", response.ContentEncoding));
 
-                // Get the stream associated with the response.
-                //Stream receiveStream = response.GetResponseStream();
-
                 // Pipes the stream to a higher level stream reader with the required encoding format. 
-                StreamReader readStream = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
+                StreamReader readStream = new StreamReader(response.GetResponseStream(), Encoding.ASCII);
                 txtMessage.AppendText("Response stream received.\r\n");
 
-                // 
+                // show URL content
                 txtOutput.AppendText(readStream.ReadToEnd());
 
-                //if(Regex.IsMatch(txtOutput.Text, txtPattern.Text, RegexOptions.None, new TimeSpan(0,0,10)))
+                // check is match pattern or not with 10 seconds timeout.
                 if (Regex.IsMatch(txtOutput.Text, txtPattern.Text, RegexOptions.None, new TimeSpan(0,0,10)))
                     txtMessage.AppendText("Match the RegEx pattern.\r\n");
                 else
