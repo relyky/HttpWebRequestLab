@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlToolbar = new System.Windows.Forms.Panel();
+            this.cboUrl = new System.Windows.Forms.ComboBox();
+            this.cbxAuthLevel = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPattern = new System.Windows.Forms.TextBox();
             this.numTimeOut = new System.Windows.Forms.NumericUpDown();
@@ -37,9 +40,6 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cbxAuthLevel = new System.Windows.Forms.ComboBox();
-            this.cboUrl = new System.Windows.Forms.ComboBox();
             this.pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,35 @@
             this.pnlToolbar.Name = "pnlToolbar";
             this.pnlToolbar.Size = new System.Drawing.Size(660, 100);
             this.pnlToolbar.TabIndex = 0;
+            // 
+            // cboUrl
+            // 
+            this.cboUrl.FormattingEnabled = true;
+            this.cboUrl.Items.AddRange(new object[] {
+            "https://tw.yahoo.com/",
+            "http://www.google.com"});
+            this.cboUrl.Location = new System.Drawing.Point(52, 12);
+            this.cboUrl.Name = "cboUrl";
+            this.cboUrl.Size = new System.Drawing.Size(361, 20);
+            this.cboUrl.TabIndex = 0;
+            // 
+            // cbxAuthLevel
+            // 
+            this.cbxAuthLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxAuthLevel.FormattingEnabled = true;
+            this.cbxAuthLevel.Location = new System.Drawing.Point(122, 38);
+            this.cbxAuthLevel.Name = "cbxAuthLevel";
+            this.cbxAuthLevel.Size = new System.Drawing.Size(291, 20);
+            this.cbxAuthLevel.TabIndex = 2;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(14, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(102, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Authentication Level";
             // 
             // label3
             // 
@@ -135,11 +164,11 @@
             this.txtMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtMessage.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txtMessage.Font = new System.Drawing.Font("細明體-ExtB", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtMessage.Location = new System.Drawing.Point(0, 406);
+            this.txtMessage.Location = new System.Drawing.Point(0, 371);
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtMessage.Size = new System.Drawing.Size(660, 102);
+            this.txtMessage.Size = new System.Drawing.Size(660, 137);
             this.txtMessage.TabIndex = 1;
             // 
             // txtOutput
@@ -150,37 +179,8 @@
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(660, 306);
+            this.txtOutput.Size = new System.Drawing.Size(660, 271);
             this.txtOutput.TabIndex = 2;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 41);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Authentication Level";
-            // 
-            // cbxAuthLevel
-            // 
-            this.cbxAuthLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxAuthLevel.FormattingEnabled = true;
-            this.cbxAuthLevel.Location = new System.Drawing.Point(122, 38);
-            this.cbxAuthLevel.Name = "cbxAuthLevel";
-            this.cbxAuthLevel.Size = new System.Drawing.Size(291, 20);
-            this.cbxAuthLevel.TabIndex = 2;
-            // 
-            // cboUrl
-            // 
-            this.cboUrl.FormattingEnabled = true;
-            this.cboUrl.Items.AddRange(new object[] {
-            "https://tw.yahoo.com/",
-            "http://www.google.com"});
-            this.cboUrl.Location = new System.Drawing.Point(52, 12);
-            this.cboUrl.Name = "cboUrl";
-            this.cboUrl.Size = new System.Drawing.Size(361, 20);
-            this.cboUrl.TabIndex = 0;
             // 
             // Form1
             // 
