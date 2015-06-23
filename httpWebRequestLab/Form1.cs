@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace httpWebRequestLab
 {
@@ -42,7 +43,7 @@ namespace httpWebRequestLab
                 request.Credentials = CredentialCache.DefaultCredentials;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                txtMessage.AppendText(string.Format("Content Length : {0}\r\n", response.ContentLength));
+                txtMessage.AppendText(string.Format("Content Length : {0:N0}\r\n", response.ContentLength));
                 txtMessage.AppendText(string.Format("Content Type : {0}\r\n", response.ContentType));
                 txtMessage.AppendText(string.Format("Content Encoding : {0}\r\n", response.ContentEncoding));
 
@@ -51,10 +52,16 @@ namespace httpWebRequestLab
 
                 // Pipes the stream to a higher level stream reader with the required encoding format. 
                 StreamReader readStream = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
-                txtMessage.AppendText(string.Format("Response stream received."));
+                txtMessage.AppendText("Response stream received.\r\n");
 
                 // 
                 txtOutput.AppendText(readStream.ReadToEnd());
+
+                //if(Regex.IsMatch(txtOutput.Text, txtPattern.Text, RegexOptions.None, new TimeSpan(0,0,10)))
+                if (Regex.IsMatch(txtOutput.Text, txtPattern.Text, RegexOptions.None, new TimeSpan(0,0,10)))
+                    txtMessage.AppendText("Match the RegEx pattern.\r\n");
+                else
+                    txtMessage.AppendText("NOT match the RegEx pattern.\r\n");
 
                 response.Close();
                 readStream.Close();                    

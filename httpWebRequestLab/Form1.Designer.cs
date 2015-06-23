@@ -29,19 +29,23 @@
         private void InitializeComponent()
         {
             this.pnlToolbar = new System.Windows.Forms.Panel();
+            this.numTimeOut = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnGo = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numTimeOut = new System.Windows.Forms.NumericUpDown();
+            this.txtPattern = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlToolbar
             // 
+            this.pnlToolbar.Controls.Add(this.label3);
+            this.pnlToolbar.Controls.Add(this.txtPattern);
             this.pnlToolbar.Controls.Add(this.numTimeOut);
             this.pnlToolbar.Controls.Add(this.label2);
             this.pnlToolbar.Controls.Add(this.txtUrl);
@@ -52,6 +56,39 @@
             this.pnlToolbar.Name = "pnlToolbar";
             this.pnlToolbar.Size = new System.Drawing.Size(645, 103);
             this.pnlToolbar.TabIndex = 0;
+            // 
+            // numTimeOut
+            // 
+            this.numTimeOut.Increment = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numTimeOut.Location = new System.Drawing.Point(84, 65);
+            this.numTimeOut.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numTimeOut.Name = "numTimeOut";
+            this.numTimeOut.Size = new System.Drawing.Size(99, 22);
+            this.numTimeOut.TabIndex = 4;
+            this.numTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numTimeOut.ThousandsSeparator = true;
+            this.numTimeOut.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Timeout (ms)";
             // 
             // txtUrl
             // 
@@ -103,38 +140,22 @@
             this.txtOutput.Size = new System.Drawing.Size(645, 273);
             this.txtOutput.TabIndex = 2;
             // 
-            // label2
+            // txtPattern
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 12);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Timeout (ms)";
+            this.txtPattern.Location = new System.Drawing.Point(298, 65);
+            this.txtPattern.Name = "txtPattern";
+            this.txtPattern.Size = new System.Drawing.Size(291, 22);
+            this.txtPattern.TabIndex = 5;
+            this.txtPattern.Text = "[\\s\\S]*(<html)[\\s\\S]*(<\\/html>)[\\s\\S]*";
             // 
-            // numTimeOut
+            // label3
             // 
-            this.numTimeOut.Increment = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numTimeOut.Location = new System.Drawing.Point(84, 65);
-            this.numTimeOut.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numTimeOut.Name = "numTimeOut";
-            this.numTimeOut.Size = new System.Drawing.Size(99, 22);
-            this.numTimeOut.TabIndex = 4;
-            this.numTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numTimeOut.ThousandsSeparator = true;
-            this.numTimeOut.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(220, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 12);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "RegEx pattern";
             // 
             // Form1
             // 
@@ -165,6 +186,8 @@
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.NumericUpDown numTimeOut;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtPattern;
     }
 }
 
