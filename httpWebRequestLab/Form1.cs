@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Net.Security;
+using System.Collections;
 
 namespace httpWebRequestLab
 {
@@ -20,15 +22,32 @@ namespace httpWebRequestLab
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //# init. : cbxAuthLevel
+            ArrayList authLevelItems = new ArrayList();
+            foreach (AuthenticationLevel c in Enum.GetValues(typeof(AuthenticationLevel)))
+                authLevelItems.Add(new KeyValuePair<AuthenticationLevel, string>(c, c.ToString()));
+
+            cbxAuthLevel.ValueMember = "Key";
+            cbxAuthLevel.DisplayMember = "Value";
+            cbxAuthLevel.DataSource = authLevelItems;
+
+            // 初使化
+            cboUrl.SelectedIndex = 0;
+        }
+
         private void btnGo_Click(object sender, EventArgs e)
         {
             try
             {
+                this.Cursor = Cursors.WaitCursor;
+
                 //# prefix actions
                 txtOutput.Clear();
 
                 //
-                string url = txtUrl.Text.Trim();
+                string url = cboUrl.Text.Trim();
                 txtMessage.AppendText("\r\n### ### ### ### ### ###\r\n");
                 txtMessage.AppendText(string.Format("URL : {0}\r\n", url));
 
@@ -41,12 +60,14 @@ namespace httpWebRequestLab
 
                 // Set credentials to use for this request.
                 request.Credentials = CredentialCache.DefaultCredentials;
+                request.AuthenticationLevel = (AuthenticationLevel)cbxAuthLevel.SelectedValue; // AuthenticationLevel.None;
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 // Show some properties
                 txtMessage.AppendText(string.Format("Content Length : {0:N0}\r\n", response.ContentLength));
                 txtMessage.AppendText(string.Format("Content Type : {0}\r\n", response.ContentType));
                 txtMessage.AppendText(string.Format("Content Encoding : {0}\r\n", response.ContentEncoding));
+                txtMessage.AppendText(string.Format("Is mutually authenticated? {0}\r\n", response.IsMutuallyAuthenticated));
 
                 // Pipes the stream to a higher level stream reader with the required encoding format. 
                 StreamReader readStream = new StreamReader(response.GetResponseStream(), Encoding.ASCII);
@@ -70,7 +91,12 @@ namespace httpWebRequestLab
                 txtMessage.AppendText(string.Format("EXCEPTION : {0}\r\n", ex.GetType().Name));
                 txtMessage.AppendText(string.Format("MESSAGE : {0}\r\n", ex.Message));
             }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
 
         }
+
     }
 }
