@@ -30,13 +30,14 @@ namespace httpWebRequestLab
             ArrayList authLevelItems = new ArrayList();
             foreach (AuthenticationLevel c in Enum.GetValues(typeof(AuthenticationLevel)))
                 authLevelItems.Add(new KeyValuePair<AuthenticationLevel, string>(c, c.ToString()));
-
+            //
             cbxAuthLevel.ValueMember = "Key";
             cbxAuthLevel.DisplayMember = "Value";
-            cbxAuthLevel.DataSource = authLevelItems;
+            cbxAuthLevel.DataSource = authLevelItems;    
 
-            // 初使化
-            cboUrl.SelectedIndex = 0;
+            //# 初使化
+            cbxCredentialCache.SelectedIndex = 0;
+            cbxUrl.SelectedIndex = 0;       
         }
 
         #region Aspect Program
@@ -47,14 +48,12 @@ namespace httpWebRequestLab
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void TraceExceptionHanler(Exception ex)
         {
-            txtMessage.AppendText("\r\n ===>>><<<===\r\n");
             txtMessage.AppendText(string.Format("EXCEPTION : {0}\r\n", ex.GetType().Name));
             txtMessage.AppendText(string.Format("MESSAGE : {0}\r\n", ex.Message));
         }
 
         private HandleFailMethod TraceExceptionAndIgnore(Exception ex)
         {
-            txtMessage.AppendText("\r\n ===>>><<<===\r\n");
             txtMessage.AppendText(string.Format("EXCEPTION : {0}\r\n", ex.GetType().Name));
             txtMessage.AppendText(string.Format("MESSAGE : {0}\r\n", ex.Message));
             return HandleFailMethod.Ignore;
@@ -97,7 +96,7 @@ namespace httpWebRequestLab
                     txtOutput.Clear();
 
                     //
-                    string url = cboUrl.Text.Trim();
+                    string url = cbxUrl.Text.Trim();
                     TraceLine("\r\n### ### ### ### ### ###");
                     TraceLine("URL : {0}", url);
 
@@ -109,11 +108,22 @@ namespace httpWebRequestLab
                     request.Timeout = (int)numTimeOut.Value; // milliseconds
 
                     // Set credentials to use for this request.
-                    request.Credentials = CredentialCache.DefaultCredentials;
                     request.AuthenticationLevel = (AuthenticationLevel)cbxAuthLevel.SelectedValue; // AuthenticationLevel.None;
+                    request.Credentials = (cbxCredentialCache.Text == "DefaultNetworkCredentials")
+                                        ? CredentialCache.DefaultNetworkCredentials
+                                        : CredentialCache.DefaultCredentials;  
+ 
+                    if(chkBypassSSL.Checked)
+                    {
+                        // 排除此Exception觸發：基礎連接已關閉: 無法為 SSL/TLS 安全通道建立信任關係。
+                        // The underlying connection was closed: Could not establish trust relationship for SSL/TLS secure channel
+                        request.ServerCertificateValidationCallback = delegate { return true; }; 
+                    }
+
+                    // take URL content
                     HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-                    // Show some properties
+                    // show some properties
                     TraceLine("Content Length : {0:N0}", response.ContentLength);
                     TraceLine("Content Type : {0}", response.ContentType);
                     TraceLine("Content Encoding : {0}", response.ContentEncoding);

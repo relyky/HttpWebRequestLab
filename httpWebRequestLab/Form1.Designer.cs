@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlToolbar = new System.Windows.Forms.Panel();
-            this.cboUrl = new System.Windows.Forms.ComboBox();
+            this.cbxCredentialCache = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbxUrl = new System.Windows.Forms.ComboBox();
             this.cbxAuthLevel = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,13 +42,17 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.txtMessage = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.chkBypassSSL = new System.Windows.Forms.CheckBox();
             this.pnlToolbar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numTimeOut)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlToolbar
             // 
-            this.pnlToolbar.Controls.Add(this.cboUrl);
+            this.pnlToolbar.Controls.Add(this.chkBypassSSL);
+            this.pnlToolbar.Controls.Add(this.cbxCredentialCache);
+            this.pnlToolbar.Controls.Add(this.label5);
+            this.pnlToolbar.Controls.Add(this.cbxUrl);
             this.pnlToolbar.Controls.Add(this.cbxAuthLevel);
             this.pnlToolbar.Controls.Add(this.label4);
             this.pnlToolbar.Controls.Add(this.label3);
@@ -58,19 +64,42 @@
             this.pnlToolbar.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlToolbar.Location = new System.Drawing.Point(0, 0);
             this.pnlToolbar.Name = "pnlToolbar";
-            this.pnlToolbar.Size = new System.Drawing.Size(660, 100);
+            this.pnlToolbar.Size = new System.Drawing.Size(660, 117);
             this.pnlToolbar.TabIndex = 0;
             // 
-            // cboUrl
+            // cbxCredentialCache
             // 
-            this.cboUrl.FormattingEnabled = true;
-            this.cboUrl.Items.AddRange(new object[] {
+            this.cbxCredentialCache.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCredentialCache.FormattingEnabled = true;
+            this.cbxCredentialCache.Items.AddRange(new object[] {
+            "DefaultCredentials",
+            "DefaultNetworkCredentials"});
+            this.cbxCredentialCache.Location = new System.Drawing.Point(122, 64);
+            this.cbxCredentialCache.Name = "cbxCredentialCache";
+            this.cbxCredentialCache.Size = new System.Drawing.Size(291, 20);
+            this.cbxCredentialCache.TabIndex = 2;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(31, 67);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 12);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Credential Cache";
+            // 
+            // cbxUrl
+            // 
+            this.cbxUrl.FormattingEnabled = true;
+            this.cbxUrl.Items.AddRange(new object[] {
             "https://tw.yahoo.com/",
-            "http://www.google.com"});
-            this.cboUrl.Location = new System.Drawing.Point(52, 12);
-            this.cboUrl.Name = "cboUrl";
-            this.cboUrl.Size = new System.Drawing.Size(361, 20);
-            this.cboUrl.TabIndex = 0;
+            "http://www.google.com/",
+            "https://mail.asiavista.com.tw/",
+            "https://gist.github.com/relyky/1b4e562bd36736f4506c.js"});
+            this.cbxUrl.Location = new System.Drawing.Point(52, 12);
+            this.cbxUrl.Name = "cbxUrl";
+            this.cbxUrl.Size = new System.Drawing.Size(361, 20);
+            this.cbxUrl.TabIndex = 0;
             // 
             // cbxAuthLevel
             // 
@@ -79,7 +108,7 @@
             this.cbxAuthLevel.Location = new System.Drawing.Point(122, 38);
             this.cbxAuthLevel.Name = "cbxAuthLevel";
             this.cbxAuthLevel.Size = new System.Drawing.Size(291, 20);
-            this.cbxAuthLevel.TabIndex = 2;
+            this.cbxAuthLevel.TabIndex = 1;
             // 
             // label4
             // 
@@ -93,7 +122,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 66);
+            this.label3.Location = new System.Drawing.Point(44, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 12);
             this.label3.TabIndex = 6;
@@ -101,7 +130,7 @@
             // 
             // txtPattern
             // 
-            this.txtPattern.Location = new System.Drawing.Point(122, 64);
+            this.txtPattern.Location = new System.Drawing.Point(122, 88);
             this.txtPattern.Name = "txtPattern";
             this.txtPattern.Size = new System.Drawing.Size(291, 22);
             this.txtPattern.TabIndex = 3;
@@ -122,7 +151,7 @@
             0});
             this.numTimeOut.Name = "numTimeOut";
             this.numTimeOut.Size = new System.Drawing.Size(99, 22);
-            this.numTimeOut.TabIndex = 1;
+            this.numTimeOut.TabIndex = 4;
             this.numTimeOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numTimeOut.ThousandsSeparator = true;
             this.numTimeOut.Value = new decimal(new int[] {
@@ -151,10 +180,10 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(543, 62);
+            this.btnGo.Location = new System.Drawing.Point(517, 85);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(75, 23);
-            this.btnGo.TabIndex = 4;
+            this.btnGo.TabIndex = 6;
             this.btnGo.Text = "Go";
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
@@ -175,12 +204,24 @@
             // 
             this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutput.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.txtOutput.Location = new System.Drawing.Point(0, 100);
+            this.txtOutput.Location = new System.Drawing.Point(0, 117);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtOutput.Size = new System.Drawing.Size(660, 271);
-            this.txtOutput.TabIndex = 2;
+            this.txtOutput.Size = new System.Drawing.Size(660, 254);
+            this.txtOutput.TabIndex = 0;
+            // 
+            // chkBypassSSL
+            // 
+            this.chkBypassSSL.AutoSize = true;
+            this.chkBypassSSL.Checked = true;
+            this.chkBypassSSL.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBypassSSL.Location = new System.Drawing.Point(493, 42);
+            this.chkBypassSSL.Name = "chkBypassSSL";
+            this.chkBypassSSL.Size = new System.Drawing.Size(79, 16);
+            this.chkBypassSSL.TabIndex = 5;
+            this.chkBypassSSL.Text = "Bypass SSL";
+            this.chkBypassSSL.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -215,7 +256,10 @@
         private System.Windows.Forms.TextBox txtPattern;
         private System.Windows.Forms.ComboBox cbxAuthLevel;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cboUrl;
+        private System.Windows.Forms.ComboBox cbxUrl;
+        private System.Windows.Forms.ComboBox cbxCredentialCache;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox chkBypassSSL;
     }
 }
 
