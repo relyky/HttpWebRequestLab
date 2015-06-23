@@ -52,6 +52,14 @@ namespace httpWebRequestLab
             txtMessage.AppendText(string.Format("MESSAGE : {0}\r\n", ex.Message));
         }
 
+        private HandleFailMethod TraceExceptionAndIgnore(Exception ex)
+        {
+            txtMessage.AppendText("\r\n ===>>><<<===\r\n");
+            txtMessage.AppendText(string.Format("EXCEPTION : {0}\r\n", ex.GetType().Name));
+            txtMessage.AppendText(string.Format("MESSAGE : {0}\r\n", ex.Message));
+            return HandleFailMethod.Ignore;
+        }
+
         /// <summary>
         /// One of Aspect Function
         /// </summary>
@@ -79,10 +87,11 @@ namespace httpWebRequestLab
         {
             AspectW.Define
                 .WaitCursor(this, btnGo)
+                //.HandleFail(TraceExceptionAndIgnore) <--- 有bug，須修正
                 .Ignore()
                 .TraceException(TraceExceptionHanler)
                 .TraceHowLong(TraceHowLongHanler)
-                .Do(()=>
+                .Do(() =>
                 {
                     //# prefix actions
                     txtOutput.Clear();
@@ -124,7 +133,7 @@ namespace httpWebRequestLab
                         TraceLine("NOT match the RegEx pattern.");
 
                     response.Close();
-                    readStream.Close(); 
+                    readStream.Close();
                 });
         }
 
